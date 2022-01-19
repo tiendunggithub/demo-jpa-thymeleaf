@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Quản lý khách hàng</title>
+</head>
+<body>
+<table class="table table-striped table-bordered">
+	<tr>
+		<th>Họ</th>
+		<th>Tên</th>
+		<th>Email</th>
+		<th>Địa chỉ</th>
+		<th>Sở thích</th>
+		<th></th>
+	</tr>
+	<th:block th:each="customer : ${customers}">
+		<tr>
+			<td th:text="${customer.firstName}"></td>
+			<td th:text="${customer.lastName}"></td>
+			<td th:text="${customer.email}"></td>
+			<td></td>
+			<!-- <td th:text="${customer.province.name}"></td> -->
+			<!-- <td th:each="hoppy : ${customer.hobbies}">
+				<span class="btn-sm">${hobby.name}</span>
+			</td> -->	
+			<td></td>
+			<td>
+				<a th:href="@{updateLink/__customer.id__}">Update</a>
+				<a th:href="@{deleteLink/__customer.id__}">Delete</a>
+			</td>
+		</tr>
+	</th>
+</table>
+</body>
+</html>

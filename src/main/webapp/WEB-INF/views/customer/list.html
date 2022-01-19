@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Quản lý khách hàng</title>
+</head>
+<body>
+<div class="container">
+		<div class="col-md-offset-1 col-md-10">
+			<h3 class="text-center">Spring MVC 5 + Spring Data JPA 2 + JSP +
+				MySQL Example - Customer Management</h3>
+			<hr />
+
+			<input type="button" value="Add Customer"
+				onclick="window.location.href='showForm'; return false;"
+				class="btn btn-primary" /> <br />
+			<br />
+			<div>
+				 <form>
+				        Search by first name:
+				        <input name="s" type="text"/>
+				        <input type="submit" value="Search"/>
+				    </form>
+				<br/>
+				</div>
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<div class="panel-title">Customer List</div>
+				</div>
+				<div class="panel-body">
+					<table class="table table-striped table-bordered">
+						<tr>
+							<th>Họ</th>
+							<th>Tên</th>
+							<th>Email</th>
+							<th>Địa chỉ</th>
+							<th>Sở thích</th>
+							<th></th>
+						</tr>
+						<th:block th:each="customer : ${customers.content}">
+							<tr>
+								<td th:text="${customer.firstName}"></td>
+								<td th:text="${customer.lastName}"></td>
+								<td th:text="${customer.email}"></td>
+								<td th:each="provin : ${customer.province}" th:text="${provin.name}">
+								<td th:each="hoppy : ${customer.hobbies}" th:text="${hoppy.name}">
+								</td>
+								<td>
+									<a th:href="@{updateForm/__${customer.id}__}">Update</a>
+									<a th:href="@{deleteLink/__${customer.id}__}">Delete</a>
+								</td>
+							</tr>
+						</th:block>
+					</table>
+				</div>
+				<div>
+				<div class="d-flex flex-row align-items-center">
+				      <th:block th:if="${customers.hasPrevious()}">
+				           <button type="submit" class="btn btn-primary btn-md" style="margin: 2px"
+				                   onclick="location.href = 'page?page=1'">&laquo; first</button>
+				           <button type="submit" class="btn btn-primary btn-md" style="margin: 2px"
+				                    onclick="location.href = 'page?page=@{customers.number - 1}'">previous</button>
+				      </th:block>
+				
+				      <th:block th:if="${customers.totalPages != 1}">
+				            <label style="margin: 2px 8px 2px 8px">
+				                 Page @{customers.number +1 } of     @{customers.totalPages}
+				            </label>
+				      </th:block>
+				
+				      <th:block th:if="${customers.hasNext()}">
+				            <button type="submit" class="btn btn-primary btn-md" style="margin: 2px"
+				                   onclick="location.href = 'page?page=@{customers.number + 1}'">next</button>
+				            <button type="submit" class="btn btn-primary btn-md" style="margin: 2px"
+				                   onclick="location.href = 'page?page=@{customers.totalPages -1}'">last &raquo;</button>                                    
+				      </th:block>
+				    </div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div class="footer">
+		<p>Footer</p>
+	</div>
+</body>
+</html>
