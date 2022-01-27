@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>App Fragments</title>
+<link rel="stylesheet" type="text/css" th:href="@{/main.css}" href="../../../static/main.css"/>
+    <!-- ============================== boxicons cdn link ============================== -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+<div th:fragment="header" class="sidebar" >
+        <div class="logo_content">
+            <div class="logo">
+                <i class='bx bxs-hot'></i>
+                <div class="logo_name">FireFlame</div>
+            </div>
+            <i class="bx bx-menu" id="btn"></i>
+        </div>
+        <ul class="nav_list">
+            <li>
+                <a href="#">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+                <span class="tooltip">Dashboard</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-table'></i>
+                    <span class="links_name">Bảng</span>
+                </a>
+                <span class="tooltip">Bảng</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-cog'></i>
+                    <span class="links_name">Account</span>
+                </a>
+                <span class="tooltip">Account</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-cog'></i>
+                    <span class="links_name">Report</span>
+                </a>
+                <span class="tooltip">Report</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-cog'></i>
+                    <span class="links_name">Setting</span>
+                </a>
+                <span class="tooltip">Setting</span>
+            </li>
+        </ul>
+    </div>
+    
+    <!-- Default Navigator -->
+    <ul th:fragment = "nav-default">
+        <li><a th:href="@{/customer/list}">Home</a></li>
+        <li><a th:href="@{/}">Products</a></li>
+        <li><a th:href="@{/about}">About</a></li>
+    </ul>
+    <!-- Admin Navigator -->
+    <ul th:fragment = "nav-admin">
+        <li><a th:href="@{/admin/products}">Product Management</a></li>
+        <li><a th:href="@{/admin/orders}">Order Management</a></li>
+    </ul>
+    <div th:fragment="copyright">
+      &copy; tiendung.com
+    </div>
+    <script>
+        let btn = document.querySelector("#btn");
+        let sidebar = document.querySelector(".sidebar");
+
+        btn.onclick =  function(){
+            sidebar.classList.toggle("active");
+        }
+
+    </script>
+</body>
+</html>

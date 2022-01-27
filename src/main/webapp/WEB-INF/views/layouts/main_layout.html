@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    th:fragment="main-fragment (title, otherStaticResources, header, nav, mainContent, footer)">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:replace="${title}">Quản lý khách hàng</title>
+    <!-- ================================= css ========================================= -->
+    <link rel="stylesheet" type="text/css" th:href="@{/main.css}" href="../../static/main.css"/>
+    <!-- ============================== boxicons cdn link ============================== -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <!-- =============================================================================== -->
+    <th:block th:replace="${otherStaticResources} ?: ~{}"></th:block>
+</head>
+<body>
+<section>
+<nav th:insert="${nav} ?: ~{}">
+    <div class="sidebar">
+        <div class="logo_content">
+            <div class="logo">
+                <i class='bx bxs-hot'></i>
+                <div class="logo_name">FireFlame</div>
+            </div>
+            <i class="bx bx-menu" id="btn"></i>
+        </div>
+        <ul class="nav_list">
+            <li>
+                <a href="#">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+                <span class="tooltip">Dashboard</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-table'></i>
+                    <span class="links_name">Bảng</span>
+                </a>
+                <span class="tooltip">Bảng</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-cog'></i>
+                    <span class="links_name">Account</span>
+                </a>
+                <span class="tooltip">Account</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-cog'></i>
+                    <span class="links_name">Report</span>
+                </a>
+                <span class="tooltip">Report</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-cog'></i>
+                    <span class="links_name">Setting</span>
+                </a>
+                <span class="tooltip">Setting</span>
+            </li>
+        </ul>
+    </div>
+    </nav>
+    <div class="home_content">
+        <article th:insert="${mainContent} ?: ~{}">
+        </article>
+    </div>
+    </section>
+    <footer th:insert="${footer} ?: ~{}">
+        <p>Footer</p>
+    </footer>
+    <script>
+        let btn = document.querySelector("#btn");
+        let sidebar = document.querySelector(".sidebar");
+
+        btn.onclick =  function(){
+            sidebar.classList.toggle("active");
+        }
+
+    </script>
+</body>
+</html>
