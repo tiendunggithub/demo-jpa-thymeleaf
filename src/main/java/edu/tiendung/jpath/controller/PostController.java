@@ -3,11 +3,15 @@ package edu.tiendung.jpath.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,10 +40,11 @@ public class PostController {
 	@Autowired
 	private PostPageService postPageService;
 	
-	@ModelAttribute("categoris")
+	@ModelAttribute("categories")
 	public List<Category> categories(){
 		return categoryService.getAll();
 	}
+	
 	@ModelAttribute("tags")
 	public List<Tag> tags(){
 		return tagService.getAll();
@@ -54,7 +59,10 @@ public class PostController {
 	}
 
 	@PostMapping("/savePost")
-	public String savePost(@ModelAttribute("post") Post thePost) {
+	public String savePost(@Valid @ModelAttribute("post") Post thePost, BindingResult result) {
+		if(result.hasErrors()) {
+			return "post/create";
+		}
 		postPageService.save(thePost);
 		return "redirect:/post/list";
 	}

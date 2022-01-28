@@ -15,6 +15,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="posts")
@@ -25,19 +27,22 @@ public class Post {
 	private int id;
 	
 	@Column(name="title")
+	@NotEmpty(message  = "Tiêu đề không được rỗng")
 	private String title;
 	
 	@Column(name="content")
+	@NotEmpty(message  = "Nội dung không được rỗng")
+	@Size(min = 20, message ="Nội dung phải có độ dài trên 20 ký tự")
 	private String content;
 	
 	@Column(name="image")
 	private String image;
 	
-	@Column(name="likes")
-	private long likes = 0;
-	
-	@Column(name="dislikes")
-	private long dislikes = 0;
+	/*
+	 * @Column(name="likes") private long likes = 0;
+	 * 
+	 * @Column(name="dislikes") private int dislikes = 0;
+	 */
 
 	@ManyToOne
 	@JoinColumn(name = "customer_id")
@@ -88,21 +93,15 @@ public class Post {
 		this.image = image;
 	}
 
-	public long getLikes() {
-		return likes;
-	}
-
-	public void setLikes(long likes) {
-		this.likes = likes;
-	}
-
-	public long getDislikes() {
-		return dislikes;
-	}
-
-	public void setDislikes(long dislikes) {
-		this.dislikes = dislikes;
-	}
+	/*
+	 * public long getLikes() { return likes; }
+	 * 
+	 * public void setLikes(long likes) { this.likes = likes; }
+	 * 
+	 * public int getDislikes() { return dislikes; }
+	 * 
+	 * public void setDislikes(int dislikes) { this.dislikes = dislikes; }
+	 */
 
 	public Customer getAuth() {
 		return auth;
@@ -130,8 +129,8 @@ public class Post {
 
 	@Override
 	public String toString() {
-		return "Post [id=" + id + ", title=" + title + ", content=" + content + ", image=" + image + ", likes=" + likes
-				+ ", dislikes=" + dislikes + ", auth=" + auth + ", category=" + category + ", tags=" + tags + "]";
+		return "Post [id=" + id + ", title=" + title + ", content=" + content + ", image=" + image
+				+ ", auth=" + auth + ", category=" + category + ", tags=" + tags + "]";
 	}
 	
 	

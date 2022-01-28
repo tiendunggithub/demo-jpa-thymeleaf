@@ -16,26 +16,22 @@ public class CategoryServiceImpl implements BaseService<Category>{
 	private CategoryRepository categoryRepository;
 	@Override
 	public List<Category> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return categoryRepository.findAll();
 	}
 
 	@Override
 	public void save(Category object) {
-		// TODO Auto-generated method stub
-		
+		categoryRepository.save(object);
 	}
 
 	@Override
 	public Category getByID(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return categoryRepository.findById(id).get();
 	}
 
 	@Override
 	public void deleteById(int id) {
-		// TODO Auto-generated method stub
-		
+		categoryRepository.deleteById(id);
 	}
 
 }

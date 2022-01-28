@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+    .error {
+        color: red;
+    }
+</style>
+</head>
+<body>
+	<div class="container">
+		<div class="col-md-offset-2 col-md-7">
+			<h3 class="text-center">Spring MVC 5 + Spring Data JPA 2 + JSP + MySQL
+				Example - Customer Management</h3>
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<div class="panel-title">Thêm bài viết</div>
+				</div>
+				<div class="panel-body">
+				<form th:action="@{/post/savePost}" th:object="${post}" method="post">
+						<!-- need to associate this data with customer id -->
+						<input type="hidden" th:field="*{id}"/>
+						<div class="form-group">
+							<label for="title" class="col-md-3 control-label">Tiêu đề</label>
+							<div class="col-md-9">
+								<input th:field="*{title}" cssClass="form-control" />
+								<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" th:errorclass="error"></span>
+								<!-- <ul>
+        							<li th:each="err : ${#fields.errors('title')}" th:text="${err}" class="error" />
+   	 							</ul> -->
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="content" class="col-md-3 control-label">Nội dung</label>
+							<div class="col-md-9">
+								<input th:field="*{content}" cssClass="form-control" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="image" class="col-md-3 control-label">image</label>
+							<div class="col-md-9">
+								<input th:field="*{image}" cssClass="form-control" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="category" class="col-md-3 control-label">Category</label>
+							
+							<select th:field="*{category}" cssClass="form-control">
+		                    	<option value=""></option>
+		                      	<option th:each="cate : ${categories}" th:value="${cate.id}" 
+		                      	th:text="${cate.name}"></option>
+		                  	</select>
+							
+						</div>
+						<div class="form-group">
+							<label for="tag" class="col-md-3 control-label">Tags</label>
+							<div class="col-md-9">
+						          <ul style="list-style-type: none;">
+						            <li th:each="tags : ${tags}">
+						              <input type="checkbox" th:field="*{tags}" th:value="${tags.id}" />
+						              <label th:text="${tags.name}"></label>
+						            </li>
+						          </ul>
+							</div>
+						</div>
+  
+						<div class="form-group">
+							<!-- Button -->
+							<div class="col-md-offset-3 col-md-9">
+								<input type="submit" value="Submit"/>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
