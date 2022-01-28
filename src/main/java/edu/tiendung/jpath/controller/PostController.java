@@ -1,5 +1,6 @@
 package edu.tiendung.jpath.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,23 +14,37 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import edu.tiendung.jpath.entity.Category;
 import edu.tiendung.jpath.entity.Post;
+import edu.tiendung.jpath.entity.Tag;
 import edu.tiendung.jpath.service.define.BaseService;
-import edu.tiendung.jpath.service.define.PostService;
+import edu.tiendung.jpath.service.define.PostPageService;
 
 @Controller
 @RequestMapping("/post")
 public class PostController {
-	
-	@Autowired
-	private BaseService<Post> postService;
-	
-	@Autowired
-	private PostService postPageService;
-	
 	/*
-	 * @Autowired private BaseService<Category> categoryService;
+	 * @Autowired private BaseService<Post> postService;
 	 */
+	
+	@Autowired
+	private BaseService<Category> categoryService;
+	
+	@Autowired
+	private BaseService<Tag> tagService;
+	
+	@Autowired
+	private PostPageService postPageService;
+	
+	@ModelAttribute("categoris")
+	public List<Category> categories(){
+		return categoryService.getAll();
+	}
+	@ModelAttribute("tags")
+	public List<Tag> tags(){
+		return tagService.getAll();
+	}
+	
 	@GetMapping("/showForm")
 	public String showFormForAdd(Model theModel) {
 		// LOG.debug("inside show customer-form handler method");
@@ -40,20 +55,20 @@ public class PostController {
 
 	@PostMapping("/savePost")
 	public String savePost(@ModelAttribute("post") Post thePost) {
-		postService.save(thePost);
+		postPageService.save(thePost);
 		return "redirect:/post/list";
 	}
 
 	@GetMapping("/updateForm")
 	public String showFormForUpdate(@RequestParam("postId") int theId, Model theModel) {
-		Post thePost = postService.getByID(theId);
+		Post thePost = postPageService.findById((long)theId);
 		theModel.addAttribute("post", thePost);
 		return "post-form";
 	}
 
 	@GetMapping("/delete")
 	public String deletePost(@RequestParam("postId") int theId) {
-		postService.deleteById(theId);
+		postPageService.remove((long)theId);
 		return "redirect:/post/list";
 	}
 	

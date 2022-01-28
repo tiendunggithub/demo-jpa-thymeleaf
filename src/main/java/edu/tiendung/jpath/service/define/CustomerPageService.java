@@ -1,7 +1,6 @@
 package edu.tiendung.jpath.service.define;
 
 import org.springframework.data.domain.Pageable;
-
 import org.springframework.data.domain.Page;
 
 import edu.tiendung.jpath.entity.Customer;

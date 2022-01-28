@@ -42,14 +42,13 @@ public class Hobby {
 		this.name = name;
 	}
 	
-	@ManyToMany(mappedBy = "hobbies")
-	private List<Customer> customers = new ArrayList();
-
-	public List<Customer> getCustomers() {
-		return customers;
-	}
-
-	public void setCustomers(List<Customer> customers) {
-		this.customers = customers;
-	}
+	/*
+	 * @ManyToMany(mappedBy = "hobbies") private List<Customer> customers = new
+	 * ArrayList();
+	 * 
+	 * public List<Customer> getCustomers() { return customers; }
+	 * 
+	 * public void setCustomers(List<Customer> customers) { this.customers =
+	 * customers; }
+	 */
 }

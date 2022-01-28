@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import edu.tiendung.jpath.entity.Post;
 import edu.tiendung.jpath.entity.Category;
 
-public interface PostService {
+public interface PostPageService {
 	Page<Post> findAll(Pageable pageable);
 
     Post findById(Long id);

@@ -38,12 +38,13 @@ public class Customer {
     private Province province;
 	
 	
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name = "customers_hobbies",
-	        joinColumns = @JoinColumn(name = "customer_id"),
-	        inverseJoinColumns = @JoinColumn(name = "hobby_id")
-	    )
-	private List<Hobby> hobbies = new ArrayList();
+	/*
+	 * @ManyToMany(fetch=FetchType.EAGER)
+	 * 
+	 * @JoinTable(name = "customers_hobbies", joinColumns = @JoinColumn(name =
+	 * "customer_id"), inverseJoinColumns = @JoinColumn(name = "hobby_id") ) private
+	 * List<Hobby> hobbies = new ArrayList();
+	 */
 
 	public Customer() {
 
@@ -93,11 +94,9 @@ public class Customer {
 		this.province = province;
 	}
 	
-	public List<Hobby> getHobbies() {
-		return hobbies;
-	}
-	
-	public void setHobbies(List<Hobby> hobbies) {
-		this.hobbies = hobbies;
-	}
+	/*
+	 * public List<Hobby> getHobbies() { return hobbies; }
+	 * 
+	 * public void setHobbies(List<Hobby> hobbies) { this.hobbies = hobbies; }
+	 */
 }

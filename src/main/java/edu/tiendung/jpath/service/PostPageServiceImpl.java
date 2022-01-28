@@ -3,16 +3,18 @@ package edu.tiendung.jpath.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import edu.tiendung.jpath.entity.Category;
 import edu.tiendung.jpath.entity.Post;
-import edu.tiendung.jpath.repository.PostRepository;
-import edu.tiendung.jpath.service.define.PostService;
+import edu.tiendung.jpath.repository.PostPageRepository;
+import edu.tiendung.jpath.service.define.PostPageService;
 
-public class PostServiceImpl implements PostService{
+@Service
+public class PostPageServiceImpl implements PostPageService{
 
 	@Autowired
-    private PostRepository postRepository;
+    private PostPageRepository postRepository;
 	@Override
 	public Page<Post> findAll(Pageable pageable) {
 		return postRepository.findAll(pageable);
